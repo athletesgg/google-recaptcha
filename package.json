@@ -28,6 +28,7 @@
     "tap": "^6.3.0"
   },
   "dependencies": {
+    "debug": "^2.2.0",
     "request": "^2.74.0"
   }
 }
