@@ -25,7 +25,7 @@ http.on('POST', (request, response) => {
   const recaptchaResponse = request.body['g-recaptcha-response']
 
   googleRecaptcha.verify({response: recaptchaResponse}, (error) => {
-    if (!error) {
+    if (error) {
       return response.send({isHuman: false})
     }
 
@@ -66,6 +66,6 @@ https://www.google.com/recaptcha/api/siteverify.
 
 ### License
 
-Copyright (c) 2015 Martin Experiments LLC
+Copyright (c) 2016 Martin Experiments LLC
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
