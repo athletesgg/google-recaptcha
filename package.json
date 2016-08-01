@@ -1,6 +1,6 @@
 {
   "name": "google-recaptcha",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple and framework agnostic way to verify Google Recaptcha data.",
   "main": "google-recaptcha.js",
   "scripts": {
