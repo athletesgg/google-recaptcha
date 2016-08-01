@@ -1,0 +1,14 @@
+#!/bin/bash
+
+printf "Running tests:\n\n"
+
+./scripts/lint
+lintResult=$?
+
+printf "Running tap tests:\n\n"
+tap tests/**/*.js -Rlist
+tapResult=$?
+
+echo "Finished tests."
+
+! (( $tapResult | $lintResult ))

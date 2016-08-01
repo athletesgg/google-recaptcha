@@ -1,0 +1,33 @@
+{
+  "name": "google-recaptcha",
+  "version": "1.0.0",
+  "description": "A simple and framework agnostic way to verify Google Recaptcha data.",
+  "main": "google-recaptcha.js",
+  "scripts": {
+    "lint": "./scripts/lint",
+    "test": "./scripts/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martin-experiments/google-recaptcha.git"
+  },
+  "keywords": [
+    "google",
+    "recaptcha",
+    "verification",
+    "v2"
+  ],
+  "author": "Martin Experiments LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/martin-experiments/google-recaptcha/issues"
+  },
+  "homepage": "https://github.com/martin-experiments/google-recaptcha#readme",
+  "devDependencies": {
+    "eslint": "^3.2.0",
+    "tap": "^6.3.0"
+  },
+  "dependencies": {
+    "request": "^2.74.0"
+  }
+}
