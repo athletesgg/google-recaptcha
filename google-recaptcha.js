@@ -1,5 +1,7 @@
 'use strict'
 
+const STATUS_OK = 200
+
 const debug = require('debug')
 const request = require('request')
 
@@ -30,24 +32,28 @@ class GoogleRecaptcha {
       return callback && callback(new Error('Missing response object.'), null)
     }
 
-    const form = {secret, response, remoteip: remoteIp}
+    const form = {
+      remoteip: remoteIp
+    , response
+    , secret
+    }
 
     const requestOptions = {
-      url: this.apiUrl
-    , form
+      form
     , json: true
+    , url: this.apiUrl
     }
 
     this.logger('Making POST request to Google:', requestOptions)
 
-    request.post(requestOptions, (error, response, body) => {
+    return request.post(requestOptions, (error, response, body) => {
       this.logger('Received POST response:', error, response.statusCode, body)
 
       if (error) {
         return callback && callback(error, null)
       }
 
-      if (response.statusCode !== 200) {
+      if (response.statusCode !== this.STATUS_OK) {
         return callback && callback(
           new Error(`Bad response code: ${response.statusCode}`)
         , null
@@ -57,7 +63,7 @@ class GoogleRecaptcha {
       if (!body.success) {
         const errorCodes = body['error-codes']
 
-        const errorCodesList = Array.isArray(errorCodes) 
+        const errorCodesList = Array.isArray(errorCodes)
           ? errorCodes.join(', ')
           : 'Unknown'
 
@@ -74,5 +80,8 @@ class GoogleRecaptcha {
 
 GoogleRecaptcha.prototype
   .DEFAULT_API_URL = 'https://www.google.com/recaptcha/api/siteverify'
+
+GoogleRecaptcha.prototype
+  .STATUS_OK = STATUS_OK
 
 module.exports = GoogleRecaptcha

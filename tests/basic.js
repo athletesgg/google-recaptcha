@@ -4,12 +4,13 @@ const tap = require('tap')
 
 const GoogleRecaptcha = require('../google-recaptcha')
 
+// eslint-disable-next-line no-process-env
 const TEST_SECRET = process.env.TEST_SECRET
 const FAKE_SECRET = 'fake_secret_key'
 
 const errors = {
-  NONE: new Error('Did not throw error.')
-, INCORRECT: new Error('Did not throw correct error.')
+  INCORRECT: new Error('Did not throw correct error.')
+, NONE: new Error('Did not throw error.')
 }
 
 // Methods
@@ -33,6 +34,7 @@ function testError(error, expectedError) {
 // Positives
 tap.test('should throw missing secret key', (t) => {
   t.throws(() => {
+    // eslint-disable-next-line no-new
     new GoogleRecaptcha()
   })
 
@@ -98,6 +100,7 @@ tap.test('should fail to verify due to invalid response', (t) => {
 
 // Negatives
 tap.test('should make a new recaptcha instance', (t) => {
+  // eslint-disable-next-line no-new
   new GoogleRecaptcha({
     secret: FAKE_SECRET
   })
