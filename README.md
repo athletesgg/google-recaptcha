@@ -1,6 +1,8 @@
 # Google Recaptcha
 
 [![Build Status](https://travis-ci.org/martin-experiments/google-recaptcha.svg?branch=master)](https://travis-ci.org/martin-experiments/google-recaptcha)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d134a5d7d1504e30a0950878f897e076)](https://www.codacy.com/app/MartinExperiments/google-recaptcha?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=martin-experiments/google-recaptcha&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/d134a5d7d1504e30a0950878f897e076)](https://www.codacy.com/app/suitupalex/google-recaptcha?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=martin-experiments/google-recaptcha&amp;utm_campaign=Badge_Coverage)
 
 A simple and framework agnostic way to verify Google Recaptcha data.
 This package currently supports

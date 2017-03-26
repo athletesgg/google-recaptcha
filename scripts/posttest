@@ -1,0 +1,9 @@
+#!/bin/bash
+
+printf "Running post test tasks:\n\n"
+
+printf "Running codacy coverage:\n\n"
+
+tap --coverage-report=text-lcov | codacy-coverage
+
+echo "Finished post test tasks."
