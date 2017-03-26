@@ -9,7 +9,7 @@ This package currently supports
 ## Installation
 
 ```bash
-$ npm install --save google-recaptcha
+$ yarn add google-recaptcha
 ```
 
 ## Usage
