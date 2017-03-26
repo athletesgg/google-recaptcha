@@ -5,6 +5,7 @@
   "main": "google-recaptcha.js",
   "scripts": {
     "lint": "./scripts/lint",
+    "posttest": "./scripts/posttest",
     "test": "./scripts/test"
   },
   "repository": {
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/martin-experiments/google-recaptcha#readme",
   "devDependencies": {
+    "codacy-coverage": "^2.0.1",
     "eslint": "^3.2.0",
     "tap": "^10.3.0"
   },

@@ -6,7 +6,7 @@ printf "Running tests:\n\n"
 lintResult=$?
 
 printf "Running tap tests:\n\n"
-tap tests/**/*.js -Rlist
+tap tests/**/*.js -Rspec --coverage
 tapResult=$?
 
 echo "Finished tests."
