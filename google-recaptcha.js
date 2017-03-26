@@ -4,37 +4,44 @@ const debug = require('debug')
 const request = require('request')
 
 class GoogleRecaptcha {
-  constructor(options) {
-    options = options || {}
-
-    if (!options.secret) {
+  constructor({
+    apiUrl
+  , secret
+  , logger
+  }) {
+    if (!secret) {
       throw new Error('Missing secret key.')
     }
 
-    this.secret = options.secret
-    this.apiUrl = options.apiUrl || this.DEFAULT_API_URL
-    this.logger = options.logger || debug('recaptcha')
+    this.secret = secret
+    this.apiUrl = apiUrl || this.DEFAULT_API_URL
+    this.logger = logger || debug('recaptcha')
 
     this.logger('Google Recaptcha initialized:', this.secret, this.apiUrl)
   }
 
-  verify(options, callback) {
-    const self = this
-
-    options = options || {}
-
-    const secret = self.secret
-    const response = options.response
-    const remoteip = options.remoteIp
+  verify({
+    response
+  , remoteIp
+  }, callback) {
+    const secret = this.secret
 
     if (!response) {
       return callback && callback(new Error('Missing response object.'), null)
     }
 
-    const form = {secret, response, remoteip}
+    const form = {secret, response, remoteip: remoteIp}
 
-    function handleResponse(error, response, body) {
-      self.logger('Received POST response:', error, response.statusCode, body)
+    const requestOptions = {
+      url: this.apiUrl
+    , form
+    , json: true
+    }
+
+    this.logger('Making POST request to Google:', requestOptions)
+
+    request.post(requestOptions, (error, response, body) => {
+      this.logger('Received POST response:', error, response.statusCode, body)
 
       if (error) {
         return callback && callback(error, null)
@@ -48,24 +55,20 @@ class GoogleRecaptcha {
       }
 
       if (!body.success) {
+        const errorCodes = body['error-codes']
+
+        const errorCodesList = Array.isArray(errorCodes) 
+          ? errorCodes.join(', ')
+          : 'Unknown'
+
         return callback && callback(
-          new Error(`Failed to verify: ${body['error-codes'].join(', ')}`)
+          new Error(`Failed to verify: ${errorCodesList}`)
         , body
         )
       }
 
       return callback && callback(null, body)
-    }
-
-    const requestOptions = {
-      url: self.apiUrl
-    , form
-    , json: true
-    }
-
-    self.logger('Making POST request to Google:', requestOptions)
-
-    request.post(requestOptions, handleResponse)
+    })
   }
 }
 
